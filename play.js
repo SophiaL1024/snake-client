@@ -1,5 +1,6 @@
 const { connect } = require('./client');
 const { setupInput } = require('./input');
+const{name}=require('./constants');
 
 console.log("Connecting ...");
 const conn = connect();
@@ -9,7 +10,7 @@ conn.on('data', (data) => {
 })
 conn.on('connect', () => {
   console.log("Successfully connected to game server");
-  conn.write("Name: FL");
+  conn.write(`Name: ${name}`);
 
   // setTimeout(() => {
   //   connect().write("Move: up")
