@@ -2,37 +2,38 @@ const { connect } = require('./client');
 const { setupInput } = require('./input');
 
 console.log("Connecting ...");
-connect();
+const conn = connect();
 setupInput();
-connect().on('data', (data) => {
+conn.on('data', (data) => {
   console.log(data);
 })
-connect().on('connect', () => {
+conn.on('connect', () => {
   console.log("Successfully connected to game server");
-  connect().write("Name: FL");
+  conn.write("Name: FL");
 
-  setTimeout(() => {
-    connect().write("Move: up")
-  },
-    1000);
-  setTimeout(() => {
-    connect().write("Move: left")
-  },
-    2000);
-  setTimeout(() => {
-    connect().write("Move: down")
-  },
-    3000);
-  setTimeout(() => {
-    connect().write("Move: right")
-  },
-    4000);
-  const timerId = setInterval(() => {
-    connect().write("Move: up")
-  }, 500);
-  setTimeout(() => {
-    clearInterval(timerId);
-  }, 5000);
+  // setTimeout(() => {
+  //   connect().write("Move: up")
+  // },
+  //   1000);
+  // setTimeout(() => {
+  //   connect().write("Move: left")
+  // },
+  //   2000);
+  // setTimeout(() => {
+  //   connect().write("Move: down")
+  // },
+  //   3000);
+  // setTimeout(() => {
+  //   connect().write("Move: right")
+  // },
+  //   4000);
+  // const timerId = setInterval(() => {
+  //   connect().write("Move: up")
+  // }, 500);
+  // setTimeout(() => {
+  //   clearInterval(timerId);
+  // }, 5000);
 })
 
-setupInput().on("data", handleUserInput);
+// setupInput(connect()).on("data", handleUserInput);
+setupInput(conn);
